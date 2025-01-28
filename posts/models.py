@@ -26,7 +26,7 @@ class Post(Model):
     title = CharField(max_length=128)
     description = TextField()
     category = ForeignKey(Category, on_delete=DO_NOTHING)
-    created = DateTimeField
+    created = DateTimeField(auto_now_add=True)
     publications = ManyToManyField(Publicatie)
 
     def __str__(self):

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import DetailView
 
 from posts.models import Post
 
@@ -14,3 +15,7 @@ def posts_view(request):
         'posts.html',
         context={'posts': posts}
     )
+
+class PostDetails(DetailView):
+    model = Post
+    template_name = 'posts_detail.html'

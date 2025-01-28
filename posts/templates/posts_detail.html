@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Detaliile postarii</h1>
+<p>Titlu: {{ object.title }}</p>
+<p>Descriere: {{ object.description }}</p>
+<p>Categorie: {{ object.category.title }}</p>
+<p>Creat la: {{ object.created }}</p>
+{% endblock %}
