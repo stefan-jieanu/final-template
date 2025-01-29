@@ -19,12 +19,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from posts.views import index, posts_view, PostDetails
+from posts.views import index, posts_view, PostDetails, CreatePostView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', index, name='home'),
     path('posts/', posts_view, name='posts-page'),
+    path('posts/create', CreatePostView.as_view(), name='posts-create'),
     path('posts/<pk>', PostDetails.as_view(), name='posts-detail'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
