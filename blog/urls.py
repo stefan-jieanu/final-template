@@ -17,8 +17,10 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.views import LogoutView
 from django.urls import path
 
+from accounts.views import CustomLoginView, CustomPasswordChangeView, SignUpView
 from posts.views import index, posts_view, PostDetails, CreatePostView
 
 urlpatterns = [
@@ -28,4 +30,9 @@ urlpatterns = [
     path('posts/', posts_view, name='posts-page'),
     path('posts/create', CreatePostView.as_view(), name='posts-create'),
     path('posts/<pk>', PostDetails.as_view(), name='posts-detail'),
+
+    path('login/', CustomLoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('change-password', CustomPasswordChangeView.as_view(), name='change-password'),
+    path('signup/', SignUpView.as_view(), name='signup'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
