@@ -1,7 +1,9 @@
 from django.db import models
-from django.db.models import CharField, TextField, OneToOneField, CASCADE
+from django.db.models import CharField, TextField, OneToOneField, CASCADE, ForeignKey
 
 from django.contrib.auth.models import User
+
+from posts.models import Post
 
 # Create your models here.
 class Profile(models.Model):
@@ -14,3 +16,11 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'Profilul lui {self.user.username}'
+
+
+class UserPostRelation(models.Model):
+    user = ForeignKey(User, on_delete=CASCADE)
+    post = ForeignKey(Post, on_delete=CASCADE)
+
+    def __str__(self):
+        return self.user.username + ' - ' + self.post.title
