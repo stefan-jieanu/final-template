@@ -6,4 +6,13 @@
 <p>Descriere: {{ object.description }}</p>
 <p>Categorie: {{ object.category.title }}</p>
 <p>Creat la: {{ object.created }}</p>
+
+<!-- Buton vizibil doar pentru utilizatorii logati -->
+{% if user.is_authenticated %}
+<form method="post" action="{% url 'add-post-to-user' object.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Adauga la favorite</button>
+</form>
+{% endif %}
+
 {% endblock %}

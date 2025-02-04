@@ -20,8 +20,8 @@ from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.urls import path
 
-from accounts.views import CustomLoginView, CustomPasswordChangeView, SignUpView
-from posts.views import index, posts_view, PostDetails, CreatePostView
+from accounts.views import CustomLoginView, CustomPasswordChangeView, SignUpView, favourites_view
+from posts.views import index, posts_view, PostDetails, CreatePostView, add_post_to_user
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,4 +35,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('change-password', CustomPasswordChangeView.as_view(), name='change-password'),
     path('signup/', SignUpView.as_view(), name='signup'),
+    path('add-post-to-user/<post_id>', add_post_to_user, name='add-post-to-user'),
+    path('favorites/', favourites_view, name='favorites')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
