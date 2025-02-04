@@ -21,7 +21,7 @@ from django.contrib.auth.views import LogoutView
 from django.urls import path
 
 from accounts.views import CustomLoginView, CustomPasswordChangeView, SignUpView, favourites_view
-from posts.views import index, posts_view, PostDetails, CreatePostView, add_post_to_user
+from posts.views import index, posts_view, post_detail_view, CreatePostView, add_post_to_user, add_review_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,12 +29,13 @@ urlpatterns = [
     path('', index, name='home'),
     path('posts/', posts_view, name='posts-page'),
     path('posts/create', CreatePostView.as_view(), name='posts-create'),
-    path('posts/<pk>', PostDetails.as_view(), name='posts-detail'),
+    path('posts/<pk>', post_detail_view, name='posts-detail'),
 
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('change-password', CustomPasswordChangeView.as_view(), name='change-password'),
     path('signup/', SignUpView.as_view(), name='signup'),
     path('add-post-to-user/<post_id>', add_post_to_user, name='add-post-to-user'),
-    path('favorites/', favourites_view, name='favorites')
+    path('favorites/', favourites_view, name='favorites'),
+    path('add-review/<post_id>', add_review_view, name='add-review')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
