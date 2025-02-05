@@ -38,3 +38,4 @@ def favourites_view(request):
         'favorites.html',
         context={'posts': posts}
     )
+

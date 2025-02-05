@@ -21,7 +21,8 @@ from django.contrib.auth.views import LogoutView
 from django.urls import path
 
 from accounts.views import CustomLoginView, CustomPasswordChangeView, SignUpView, favourites_view
-from posts.views import index, posts_view, post_detail_view, CreatePostView, add_post_to_user, add_review_view
+from posts.views import index, posts_view, post_detail_view, CreatePostView, add_post_to_user, add_review_view, \
+    ReviewUpdateView, ReviewDeleteView, see_all_reviews_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,5 +38,8 @@ urlpatterns = [
     path('signup/', SignUpView.as_view(), name='signup'),
     path('add-post-to-user/<post_id>', add_post_to_user, name='add-post-to-user'),
     path('favorites/', favourites_view, name='favorites'),
-    path('add-review/<post_id>', add_review_view, name='add-review')
+    path('add-review/<post_id>', add_review_view, name='add-review'),
+    path('edit-review/<pk>', ReviewUpdateView.as_view(), name='edit-review'),
+    path('delete-review/<pk>', ReviewDeleteView.as_view(), name='delete-review'),
+    path('all-reviews/<pk>', see_all_reviews_view, name='all-reviews')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

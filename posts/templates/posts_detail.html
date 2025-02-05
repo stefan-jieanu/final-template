@@ -16,6 +16,7 @@
 {% endif %}
 
 <!-- Sectiunea de adaugat recenzii -->
+{% if not user_already_reviewed %}
 <div>
     <h1>Adauga o recenzie</h1>
     <form method="post" action="{% url 'add-review' object.id %}">
@@ -36,14 +37,21 @@
         <input type="submit" class="btn btn-primary" value="Adauga">
     </form>
 </div>
+{% endif %}
 
 <div>
     <h1>Recenzii</h1>
-    <ul>
+    <a href="{% url 'all-reviews' object.pk %}">Vezi toate</a>
+    <ul class="mt-4">
         {% for review in reviews %}
         <li>
+            <p>Adaugata de: {{ review.user.username }}</p>
             <p>Rating: {{ review.rating }}</p>
             <p>Descriere: {{ review.description }}</p>
+            {% if review.user == user %}
+                <a class="btn btn-warning" href="{% url 'edit-review' review.pk %}">Edit</a>
+                <a class="btn btn-danger" href="{% url 'delete-review' review.pk %}">Delete</a>
+            {% endif %}
         </li>
         {% endfor %}
     </ul>
